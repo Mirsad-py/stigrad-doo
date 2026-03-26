@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stigrad D.O.O. - Profesionalne rešitve za niskogradnje</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome za ikone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Boje teme */
+        :root {
+            --dark-gray: #2c3e50;
+            --light-gray: #ecf0f1;
+            --gold: #d4a574;
+            --orange: #f39c12;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--dark-gray);
+            padding: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--gold) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand img {
+            height: 45px;
+            width: auto;
+        }
+
+        .nav-link {
+            color: var(--white) !important;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--gold) !important;
+        }
+
+        /* Hero sekcija */
+        .hero {
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #34495e 100%);
+            color: var(--white);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background-image: url('logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right center;
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-image {
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: var(--orange);
+            border-color: var(--orange);
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #e67e22;
+            border-color: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sekcije */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .accent-line {
+            width: 80px;
+            height: 4px;
+            background-color: var(--gold);
+            margin: 0 auto 2rem;
+        }
+
+        /* O nama sekcija */
+        #oNas {
+            background-color: var(--light-gray);
+        }
+
+        #oNas p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Usluge/Storitve */
+        .service-card {
+            background: var(--white);
+            border: none;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h5 {
+            color: var(--dark-gray);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Galerija */
+        #galerija {
+            background-color: var(--light-gray);
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(212, 165, 116, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        /* Zakaj izbrati nas */
+        .feature-box {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .feature-box h5 {
+            color: var(--dark-gray);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Kontakt sekcija */
+        #kontakt {
+            background: linear-gradient(135deg, var(--dark-gray) 0%, #34495e 100%);
+            color: var(--white);
+        }
+
+        .kontakt-forma {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 10px;
+            color: var(--text-dark);
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 12px;
+            margin-bottom: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 0.2rem rgba(243, 156, 18, 0.25);
+        }
+
+        .kontakt-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .kontakt-info h5 {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            width: 30px;
+            margin-right: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a252f;
+            color: var(--white);
+            padding: 3rem 0 1rem;
+            border-top: 4px solid var(--gold);
+        }
+
+        .footer-column h6 {
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero::before {
+                opacity: 0;
+            }
+
+            .hero-image {
+                max-height: 300px;
+                margin-top: 2rem;
+            }
+
+            section {
+                padding: 50px 0;
+            }
+        }
+
+        /* Animacije */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#domov">
+                <img src="logo.png" alt="Stigrad D.O.O. Logo">
+                Stigrad D.O.O.
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#domov">Domov</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#oNas">O nas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#storitve">Storitve</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#galerija">Galerija</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#kontakt">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero sekcija -->
+    <section class="hero" id="domov">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="fade-in">Zanesljive rešitve za niskogradnje</h1>
+                    <p class="fade-in">Izvajamo izkope, odvoz materiala, grederanje in ravnanje terena ter cest zanesljivo, hitro in kakovostno. Z moderno mehanizacijo in izkušenim timom zagotavljamo najboljše rezultate za vaš projekt.</p>
+                    <a href="#kontakt" class="btn btn-primary btn-lg">Kontaktirajte nas</a>
+                </div>
+                <div class="col-lg-6">
+                    <img src="kamion.jpg" alt="Gradbeni kamion" class="hero-image fade-in">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O nas -->
+    <section id="oNas">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="bager.jpg" alt="Bager" class="img-fluid rounded shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title text-start">O podjetju Stigrad D.O.O.</h2>
+                    <div class="accent-line" style="margin-left: 0;"></div>
+                    <p>
+                        Stigrad D.O.O. je zanesljiv partner za vse vrste niskogradnjih del. S posebnim poudarkom na kakovosti, natančnosti in pravočasnosti izvajamo vse vrste izkopavanja, odvoza materiala, grederanja in ravnanja terena ter cest.
+                    </p>
+                    <p>
+                        Naš tim sestavljajo izkušeni operaterji in vozniki, ki imajo dolgoletne izkušnje v gradbeništvu. Razpolagamo s sodobno mehanizacijo in opremo, ki nam omogoča hitro in kvalitetno izvajanje naročenih del.
+                    </p>
+                    <p>
+                        Naši stranki so mali in srednje veliki podjetja, občine ter zasebni naročniki. Vsakemu projektu pristopimo z visoko strokovnostjo in odgovornostjo, saj je zaupanje strank naša najpomembnejša vrednost.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <div>
+                            <h5 style="color: var(--orange); font-weight: 700;">20+</h5>
+                            <p>Let izkušenj</p>
+                        </div>
+                        <div>
+                            <h5 style="color: var(--orange); font-weight: 700;">500+</h5>
+                            <p>Zadovoljnih strank</p>
+                        </div>
+                        <div>
+                            <h5 style="color: var(--orange); font-weight: 700;">100%</h5>
+                            <p>Kakovost</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Storitve -->
+    <section id="storitve">
+        <div class="container">
+            <h2 class="section-title">Naše storitve</h2>
+            <div class="accent-line"></div>
+            <p class="section-subtitle">Nudimo celovitne rešitve za vse vrste niskogradnjih del. Izbiramo med naslednjimi storitvami:</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shovel"></i>
+                        </div>
+                        <h5>Izkop materiala</h5>
+                        <p>Strokovn izkop zemljice, peska, gramoza in drugih materialov. Uporabimo sodobno mehanizacijo za natančne in varne izkope. Hitro in učinkovito izvajamo dela na manjših in večjih projektih.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h5>Odvoz materiala</h5>
+                        <p>Zanesljiv odvoz izkopanih materialov, ruševin in drugih odpadkov. Imamo floto tovornjakov različnih zmogljivosti. Poskrbimo za hitrо in pravilno manipulacijo in transport na dogovorjena mesta.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-grip"></i>
+                        </div>
+                        <h5>Grederanje</h5>
+                        <p>Strokovno grederanje terena z modernimi grederji. Razravnavanje, utrjevanje in oblikovanje površin za pripravo na nadaljnja gradbena dela. Zagotavljamo natančnost in kvaliteto po najvišjih standardih.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-level"></i>
+                        </div>
+                        <h5>Ravnanje prostora</h5>
+                        <p>Strokovno ravnanje in priprava površin za gradnjo. Odstranjevanje ovir, zasipavanje jamb in utrjevanje terena. Delo izvajamo z največjo pozornostjo na okolico in varnostne standarde.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <h5>Urejanje cest</h5>
+                        <p>Profesionalno urejanje in ravnanje cest, poti in dostopnih površin. Razravnavanje asfalta in betona, pripravljanje temeljev in vzdrževanje prometnih površin. Hitro in varno za promet.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h5>Dodatne storitve</h5>
+                        <p>Ponudimo tudi druge storitve prilagojene vašim potrebam. Izvedba posebnih projektov, rentoizajem mehanizacije in druge storitve po dogovoru. Vzamemo vas posebne zahteve v obzir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galerija -->
+    <section id="galerija">
+        <div class="container">
+            <h2 class="section-title">Galerija</h2>
+            <div class="accent-line"></div>
+            <p class="section-subtitle">Pregled naše mehanizacije in izvedenih del</p>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="kamion.jpg" alt="Gradbeni kamion">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="bager.jpg" alt="Bager">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="greder.jpg" alt="Greder">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="kamion (2).jpg" alt="Kamion za izkopavanja">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="Bager (2).jpg" alt="Bager - kapaciteta">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="Bager (3).jpg" alt="Bager - izvedba">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="greder (2).jpg" alt="Greder - rad">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="gallery-item">
+                        <img src="logo.png" alt="Stigrad D.O.O. - Logo">
+                        <div class="gallery-overlay">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Zakaj izbrati nas -->
+    <section style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Zakaj izbrati nas?</h2>
+            <div class="accent-line"></div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h5>Zanesljivost</h5>
+                        <p>Več kot 20 let izkušenj v branži. Vedno pravočasno in natančno izvajamo naročena dela. Zaupanje strank je naša glavna vrednost.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h5>Sodobna mehanizacija</h5>
+                        <p>Razpolagamo z najnovejšo opremo in mehanizacijo. Redno vzdrževanje in investicije v nove stroje zagotavljajo kakovost in učinkovitost.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-ruler"></i>
+                        </div>
+                        <h5>Natančnost izvedbe</h5>
+                        <p>Vsako delo izvajamo s posebno pozornostjo na podrobnosti. Najpomembnejša je kakovost in točnost izvedbe po dogovorenih specifikacijah.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h5>Pravočasnost</h5>
+                        <p>Spoštujemo dogovorjene roke. Pravočasno dokončanje del je naša prednost in obljuba vsakemu stranku za brezskrbne projekte.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="kontakt">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--white); margin-bottom: 1rem;">Kontaktirajte nas</h2>
+            <div class="accent-line"></div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <form class="kontakt-forma">
+                        <h5 class="mb-4">Pošljite nam sporočilo</h5>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" placeholder="Vaše ime" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Vaša e-pošta" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control" placeholder="Telefonska številka" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" rows="5" placeholder="Vaše sporočilo" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Pošlji sporočilo</button>
+                    </form>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="kontakt-info">
+                        <h5>Kontaktni podatki</h5>
+                        
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div>
+                                <strong>Stigrad D.O.O.</strong><br>
+                                Niskogradnje in gradbeništvo
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <strong>Telefon</strong><br>
+                                +386 (0)1 XXX XXXX<br>
+                                +386 (0) XXX XXX XXX
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <strong>E-pošta</strong><br>
+                                info@stigrad.si<br>
+                                narocilo@stigrad.si
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <strong>Naslov</strong><br>
+                                Stigrad D.O.O.<br>
+                                Naslov 123<br>
+                                1000 Ljubljana, Slovenija
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <strong>Delovni čas</strong><br>
+                                Ponedeljek - Petek: 8:00 - 17:00<br>
+                                Sobota - Nedelja: Po dogovoru
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 footer-column mb-4">
+                    <h6>O nas</h6>
+                    <p style="font-size: 0.9rem; color: #bbb;">
+                        Stigrad D.O.O. je vodilna gradbena služba za niskogradnje in tehnične rešitve v Sloveniji. S pristopom kakovosti in zanesljivosti izgrajujemo povečanje poslovnih rezultatov.
+                    </p>
+                </div>
+
+                <div class="col-md-3 footer-column mb-4">
+                    <h6>Hitre povezave</h6>
+                    <ul>
+                        <li><a href="#domov">Domov</a></li>
+                        <li><a href="#oNas">O nas</a></li>
+                        <li><a href="#storitve">Storitve</a></li>
+                        <li><a href="#galerija">Galerija</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 footer-column mb-4">
+                    <h6>Storitve</h6>
+                    <ul>
+                        <li><a href="#storitve">Izkop materiala</a></li>
+                        <li><a href="#storitve">Odvoz materiala</a></li>
+                        <li><a href="#storitve">Grederanje</a></li>
+                        <li><a href="#storitve">Ravnanje cest</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 footer-column mb-4">
+                    <h6>Kontakt</h6>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> +386 (0)1 XXX XXXX</li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@stigrad.si">info@stigrad.si</a></li>
+                        <li style="margin-top: 1rem;">
+                            <a href="#" style="color: var(--gold); margin-right: 1rem;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" style="color: var(--gold); margin-right: 1rem;"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" style="color: var(--gold);"><i class="fab fa-instagram"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Stigrad D.O.O. Vse pravice pridržane. | Zanesljive rešitve za niskogradnje</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Smooth scrolling za nav linkove -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animacija pri učitavanju
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .feature-box').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
